@@ -6,14 +6,19 @@ Note that blueprints here are decoded to JSON before being source controlled.  T
 
 ### Prerequisites
 You will need pigz (for zlib compression) and jq (json processing) installed via your favourite package manager (apt on ubuntu).
+
 `apt update && apt install pigz jq -y`
 
 ### Decoding
 Decode a blueprint stored in **raw** and print it to console with:
+
 `cut -c2- raw | base64 -d | pigz -cd | jq`
+
 Decode a blueprint and save it to a file named **pretty**:
-cut -c2- raw | base64 -d | pigz -cd | jq > pretty
+
+`cut -c2- raw | base64 -d | pigz -cd | jq > pretty`
 
 ### Encoding
 To encode the **pretty** file back to **raw**:
-cat pretty | { printf 0; jq -c . | pigz -9 | base64 -w0; } > raw
+
+`cat pretty | { printf 0; jq -c . | pigz -9 | base64 -w0; } > raw`
